@@ -31,15 +31,16 @@
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
 -export([start_link/0]).
 -export([start/0]).
-
+-export([get_store/0]).
 %% ====================================================================
 %% External functions
 %% ====================================================================
-
+get_store() ->
+	gen_server:call(?MODULE, get_store).
 %% --------------------------------------------------------------------
 %% record definitions
 %% --------------------------------------------------------------------
--record(state, {}).
+-record(state, {store=[]}).
 %% ====================================================================
 %% Server functions
 %% ====================================================================
@@ -73,6 +74,9 @@ init([]) ->
 %%          {stop, Reason, Reply, State}   | (terminate/2 is called)
 %%          {stop, Reason, State}            (terminate/2 is called)
 %% --------------------------------------------------------------------
+handle_call(get_store, From, #state{store = Store} = State) ->
+    {reply, Store, State};
+	
 handle_call(Request, From, State) ->
     Reply = ok,
     {reply, Reply, State}.
@@ -84,7 +88,13 @@ handle_call(Request, From, State) ->
 %%          {noreply, State, Timeout} |
 %%          {stop, Reason, State}            (terminate/2 is called)
 %% --------------------------------------------------------------------
+handle_cast({save, [{node, Node}, {state, State1}, {time, Time}, {ip, Ip}]}, #state{store = Store} = State) ->
+	error_logger:info_msg("save node : ~p in state ~p with time : ~p~n", [Node, State, Time]),		
+	New_store = add([{node, Node}, {state, State1}, {time, Time}, {ip, Ip}], Store),
+    {noreply, State#state{store = New_store}};
+
 handle_cast(Msg, State) ->
+	error_logger:info_msg("got unknown message : ~p~n", [Msg]),
     {noreply, State}.
 
 %% --------------------------------------------------------------------
@@ -94,8 +104,7 @@ handle_cast(Msg, State) ->
 %%          {noreply, State, Timeout} |
 %%          {stop, Reason, State}            (terminate/2 is called)
 %% --------------------------------------------------------------------
-handle_info({save, [{node, Node}, {state, State1}, {time, Time}]}, State) ->
-	error_logger:info_msg("save node : ~p in state ~p with time : ~p~n", [Node, State, Time]),
+handle_info(Info, State) ->
     {noreply, State}.
 
 %% --------------------------------------------------------------------
@@ -117,6 +126,9 @@ code_change(OldVsn, State, Extra) ->
 %% --------------------------------------------------------------------
 %%% Internal functions
 %% --------------------------------------------------------------------
+%%keyreplace(Key, N, TupleList1, NewTuple) -> TupleList2
+add([{node, Node}, {state, State1}, {time, Time}, {ip, Ip}], Store) ->
+	lists:keystore(Node, 1, Store, {Node, [{state, State1}, {time, Time}, {ip, Ip}]}).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
@@ -125,4 +137,6 @@ code_change(OldVsn, State, Extra) ->
 %% --------------------------------------------------------------------
 -include_lib("eunit/include/eunit.hrl").
 -ifdef(TEST).
+add_test() ->
+	?assertEqual([{"node", [{state, "aktiv"}, {time, "time"}, {ip, "Ip"}]}], add([{node, "node"}, {state, "aktiv"}, {time, "time"}, {ip, "Ip"}], [])).
 -endif.
