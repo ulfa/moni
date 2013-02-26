@@ -31,12 +31,15 @@
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
 -export([start_link/0]).
 -export([start/0]).
--export([get_store/0]).
+-export([get_store/0, add_node/1, is_alive/1]).
 %% ====================================================================
 %% External functions
 %% ====================================================================
 get_store() ->
 	gen_server:call(?MODULE, get_store).
+
+add_node([{node, Node}, {state, State1}, {time, Time}, {ip, Ip}]) ->
+	gen_server:cast(?MODULE, {save, [{node, Node}, {state, State1}, {time, Time}, {ip, Ip}]}).
 %% --------------------------------------------------------------------
 %% record definitions
 %% --------------------------------------------------------------------
@@ -129,6 +132,19 @@ code_change(OldVsn, State, Extra) ->
 %%keyreplace(Key, N, TupleList1, NewTuple) -> TupleList2
 add([{node, Node}, {state, State1}, {time, Time}, {ip, Ip}], Store) ->
 	lists:keystore(Node, 1, Store, {Node, [{state, State1}, {time, Time}, {ip, Ip}]}).
+
+get_state([], Acc) ->
+	Acc;
+get_state([Node|Nodes], Acc) ->
+	ok.
+	
+is_alive(pong) ->
+	true;
+is_alive(pang) ->
+	false;
+is_alive(Node) ->
+	is_alive(net_adm:ping(Node)).
+
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
