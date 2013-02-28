@@ -1,0 +1,10 @@
+{% extends "base.dtl" %}
+{% block body %}
+
+sdf
+
+<div id="appmon" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<script>
+
+</script>
+{% endblock %}
