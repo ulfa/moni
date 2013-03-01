@@ -37,6 +37,7 @@ start() ->
 	ensure_started(mochiweb),
 	application:set_env(webmachine, webmachine_logger_module, webmachine_logger),
 	ensure_started(webmachine),
+	ensure_started(searcher),	
 	application:start(?MODULE).
 
 stop() ->

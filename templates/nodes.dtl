@@ -1,0 +1,28 @@
+{% extends "base.dtl" %}
+
+<title>{% block title %}Nodes Overview{% endblock %}</title>
+
+{% block body %}
+
+	<table class="table">  
+        <thead>  
+          <tr>  
+            <th>Node Name</th>  
+			<th>Ip</th>  
+            <th>Status</th>  
+            <th>Last update</th>  
+          </tr>  
+        </thead>  
+		{% for node, detail in nodes %}		
+        <tbody>  
+		    <tr>  
+				<td><a href="/nodes/{{ node }}">{{ node }}</a></td>  
+				{% for Key, Value in detail %}
+				<td>{{ Value }}</td>  
+				{% endfor %}
+			</tr>  
+		</tbody>
+		{% endfor %}
+	</table>
+
+{% endblock %}

@@ -18,7 +18,7 @@
 %%%
 %%% Created : 
 %%% -------------------------------------------------------------------
--module(nodes_resource).
+-module(node_resource).
 
 %% --------------------------------------------------------------------
 %% External exports
@@ -221,11 +221,8 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = nodes_dtl:render([{nodes, get_nodes()}]),
-	{Content, ReqData, Context}.  
-	  
-get_nodes() ->
-	node_repo:get_store().
+	{ok, Content} = node_dtl:render([]),
+	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------

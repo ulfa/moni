@@ -12,7 +12,7 @@
 -record(context, {docroot,fullpath,fileinfo}).
  
 init(DocRoot) -> 
-	Directory = filename:join(code:priv_dir(watcherl),DocRoot),
+	Directory = filename:join(code:priv_dir(loggerl),DocRoot),
 	{ok, #context{docroot=Directory}}.
  
 resource_exists(ReqData, Context) ->
