@@ -1,4 +1,4 @@
-{application, loggerl,
+{application, moni,
  [
   {description, ""},
   {vsn, "1"},
@@ -7,6 +7,6 @@
                   kernel,
                   stdlib
                  ]},
-  {mod, { loggerl_app, []}},
+  {mod, { moni_app, []}},
   {env, []}
  ]}.

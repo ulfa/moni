@@ -1,4 +1,4 @@
--module(loggerl_app).
+-module(moni_app).
 
 -behaviour(application).
 
@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-  	loggerl_sup:start_link().
+  	moni_sup:start_link().
 
 stop(_State) ->
     ok.

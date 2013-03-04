@@ -1,5 +1,5 @@
 
--module(loggerl_sup).
+-module(moni_sup).
 
 -behaviour(supervisor).
 

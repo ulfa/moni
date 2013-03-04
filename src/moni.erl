@@ -18,7 +18,7 @@
 %%%
 %%% Created : 16.02.2012
 %%% -------------------------------------------------------------------
--module(loggerl).
+-module(moni).
 
 %% Application callbacks
 -export([start/0, stop/0]).
