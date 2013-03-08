@@ -225,7 +225,7 @@ to_html(ReqData, Context) ->
 	{Content, ReqData, Context}.  
 	  
 get_nodes() ->
-	node_repo:get_store().
+	sue:get_children().
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
