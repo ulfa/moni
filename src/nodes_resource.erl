@@ -23,7 +23,8 @@
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
--export([init/1, to_html/2, content_types_provided/2, allowed_methods/2, resource_exists/2]).
+-export([init/1, content_types_provided/2, allowed_methods/2, resource_exists/2]).
+-export([to_json/2, to_html/2]).
 %% --------------------------------------------------------------------
 %% Include files
 %% --------------------------------------------------------------------
@@ -137,7 +138,7 @@ process_post(ReqData, Context) ->
 % return tuples, then a 406 Not Acceptable will be sent.
 % 
 content_types_provided(ReqData, Context) ->
-    {[{"text/html", to_html}],ReqData, Context}.
+    {[{"text/html", to_html}, {"application/json", to_json}],ReqData, Context}.
 %
 % This is used similarly to content_types_provided, except that it is for incoming 
 % resource representations -- for example, PUT requests. Handler functions usually 
@@ -223,7 +224,13 @@ finish_request(ReqData, Context) ->
 to_html(ReqData, Context) ->
 	{ok, Content} = nodes_dtl:render([{nodes, get_nodes()}]),
 	{Content, ReqData, Context}.  
-	  
+to_json(ReqData, Context) ->		
+	Content = "json",
+	{Content, ReqData, Context}.    
+
+%% --------------------------------------------------------------------
+%%% internal functions
+%% --------------------------------------------------------------------	  
 get_nodes() ->
 	sue:get_children().
 %% --------------------------------------------------------------------
