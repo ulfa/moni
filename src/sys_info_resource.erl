@@ -221,8 +221,9 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% Additional functions
 %% --------------------------------------------------------------------
-to_html(ReqData, Context) ->	
-	{ok, Content} = node_dtl:render([]),
+to_html(ReqData, Context) ->
+	Result = get_sysinfo(wrq:path_info(id, ReqData)),
+	{ok, Content} = sysinfo_dtl:render([{sysinfos, Result}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->
 	Result = get_sysinfo(wrq:path_info(id, ReqData)),
