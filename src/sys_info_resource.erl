@@ -23,7 +23,8 @@
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
--export([init/1, to_html/2, content_types_provided/2, allowed_methods/2, resource_exists/2]).
+-export([init/1, content_types_provided/2, allowed_methods/2, resource_exists/2]).
+-export([to_json/2, to_html/2]).
 %% --------------------------------------------------------------------
 %% Include files
 %% --------------------------------------------------------------------
@@ -137,7 +138,7 @@ process_post(ReqData, Context) ->
 % return tuples, then a 406 Not Acceptable will be sent.
 % 
 content_types_provided(ReqData, Context) ->
-    {[{"text/html", to_html}],ReqData, Context}.
+    {[{"text/html", to_html}, {"application/json", to_json}],ReqData, Context}.
 %
 % This is used similarly to content_types_provided, except that it is for incoming 
 % resource representations -- for example, PUT requests. Handler functions usually 
@@ -220,9 +221,24 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% Additional functions
 %% --------------------------------------------------------------------
-to_html(ReqData, Context) ->
+to_html(ReqData, Context) ->	
 	{ok, Content} = node_dtl:render([]),
 	{Content, ReqData, Context}.    
+to_json(ReqData, Context) ->
+	Result = get_sysinfo(wrq:path_info(id, ReqData)),
+	Content = result_to_json(Result),
+	{Content, ReqData, Context}.    
+%% --------------------------------------------------------------------
+%%% internal functions
+%% --------------------------------------------------------------------
+result_to_json(Result) ->
+	Jsx_input = converter:proplists_to_jsx_input(Result),
+	jsx:encode(Jsx_input).
+	
+get_sysinfo(Node) when is_list(Node)->
+	get_sysinfo(erlang:list_to_atom(Node));
+get_sysinfo(Node) ->
+	sue:sys_info(Node).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
