@@ -1,0 +1,31 @@
+{% extends "base.dtl" %}
+{% block body %}
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {packages: ['orgchart']});
+</script>
+
+<script type="text/javascript">
+      function drawVisualization() {
+        // Create and populate the data table.
+        var data = google.visualization.arrayToDataTable([
+			{% for app, name in apps %}
+			['{{app}}', '{{name}}'],
+			{% endfor %}
+			]);
+        // Create and draw the visualization.				
+        new google.visualization.OrgChart(document.getElementById('appmon')).
+            draw(data, {allowHtml: true});
+      }
+	  
+     
+      google.setOnLoadCallback(drawVisualization);
+	  
+    </script>
+	<div class="container">
+		<div class="well">
+			<div id="appmon" style="width: 600px; height: 300px;"></div>
+		</div>
+	</div>
+{% endblock %}

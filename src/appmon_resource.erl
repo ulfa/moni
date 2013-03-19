@@ -18,7 +18,7 @@
 %%%
 %%% Created : 
 %%% -------------------------------------------------------------------
--module(memory_resource).
+-module(appmon_resource).
 
 %% --------------------------------------------------------------------
 %% External exports
@@ -222,23 +222,16 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = memory_dtl:render([{node, wrq:path_info(id, ReqData)}]),
+	Node = wrq:path_info(id, ReqData),
+	{ok, Content} = appmon_dtl:render([{apps, sue:get_applications(list_to_atom(Node))}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
-	Result = get_memory(wrq:path_info(id, ReqData)),
-	Content = result_to_json(Result),
+	Content = "json",
 	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
-result_to_json(Result) ->
-	Jsx_input = converter:proplists_to_jsx_input(Result),
 	
-	jsx:encode(Jsx_input).
-get_memory(Node) when is_list(Node)->
-	get_memory(erlang:list_to_atom(Node));	
-get_memory(Node) ->
-	sue:memory(Node).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------

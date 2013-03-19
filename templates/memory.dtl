@@ -1,7 +1,12 @@
 {% extends "base.dtl" %}
 {% block body %}
 
-<div id="memory" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div class="container">
+	<div class="well">
+		<div id="memory" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+	</div>
+</div>
+<script src="/js/highcharts.js" type="text/javascript"></script>
 <script>
 $(function () {
     $(document).ready(function() {
@@ -19,7 +24,7 @@ $(function () {
                 marginRight: 10,
 				events: {
 					load: function(event) {						
-						var series = this.series[0];
+						var series0 = this.series[0];
 						var response = 0;	
 							setInterval(function() {
 								$.ajax({
@@ -31,8 +36,7 @@ $(function () {
 										
 										 });
 								var x = (new Date()).getTime(); // current time
-								var y = response.total;
-							    series.addPoint([x, y], true, true);
+							    series0.addPoint([x, response.total], true, true);
 							}, 1000);																	
 
 				         }
@@ -71,7 +75,6 @@ $(function () {
             series: [{
                 name: 'total',
                 data: (function() {
-                    // generate an array of random data
                     var data = [],
                         time = (new Date()).getTime(),
                         i;
@@ -82,8 +85,8 @@ $(function () {
                         });
                     }
                     return data;
-                })()
-            }]
+                })()		
+			}]
         });
     });
     
