@@ -10,22 +10,21 @@
       function drawVisualization() {
         // Create and populate the data table.
         var data = google.visualization.arrayToDataTable([
-			{% for app, name in apps %}
+		{% for app, name in apps %}
 			['{{app}}', '{{name}}'],
-			{% endfor %}
+		{% endfor %}
 			]);
-        // Create and draw the visualization.				
+        // Create and draw the visualization.					
         new google.visualization.OrgChart(document.getElementById('appmon')).
-            draw(data, {allowHtml: true});
+            draw(data, {allowHtml: true, size: 'large'});
       }
 	  
-     
       google.setOnLoadCallback(drawVisualization);
 	  
     </script>
 	<div class="container">
-		<div class="well">
+
 			<div id="appmon" style="width: 600px; height: 300px;"></div>
-		</div>
+
 	</div>
 {% endblock %}
