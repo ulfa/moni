@@ -222,7 +222,9 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	Content="sdasdsadsadsadas",
+	Result = etop(wrq:path_info(id, ReqData)),
+	io:format("......... : ~p~n " , [Result]),
+	{ok,Content} = etop_dtl:render([]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Content = "json",
@@ -230,7 +232,8 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
-	
+etop(Node) when is_list(Node)->
+	sue:etop(list_to_atom(Node)).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------

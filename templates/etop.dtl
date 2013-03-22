@@ -1,0 +1,11 @@
+{% extends "base.dtl" %}
+
+<title>{% block title %}Nodes Overview{% endblock %}</title>
+
+{% block body %}
+<div class="container">
+	
+	asdasdasds
+</div>
+</div>
+{% endblock %}
