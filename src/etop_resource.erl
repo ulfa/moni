@@ -222,9 +222,9 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	Result = etop(wrq:path_info(id, ReqData)),
-	io:format("......... : ~p~n " , [Result]),
-	{ok,Content} = etop_dtl:render([]),
+	Node = wrq:path_info(id, ReqData),
+	{Info, List} = etop(Node),
+	{ok,Content} = etop_dtl:render([{node, Node},{info, Info},{list, List}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Content = "json",
