@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "src"
+		},
+		{
+			"path": "templates"
+		},
+		{
+			"path": "priv/www/static/css"
+		}
+	]
+}
