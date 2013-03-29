@@ -223,15 +223,21 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
-	{ok, Content} = appmon_dtl:render([{apps, sue:get_applications(list_to_atom(Node))}]),
+	{ok, Content} = appmon_dtl:render([{apps, get_applications(Node)}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
-	Content = "json",
+	Node = wrq:path_info(id, ReqData),	
+	Result = get_applications(Node), 
+	Content = result_to_json(Result),
 	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
-	
+get_applications(Node) when is_list(Node)->
+	sue:get_applications(list_to_atom(Node)).
+result_to_json(Result) ->
+	Jsx_input = converter:proplists_to_jsx_input(Result),	
+	jsx:encode(Jsx_input).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
