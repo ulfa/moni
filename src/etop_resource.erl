@@ -104,6 +104,7 @@ delete_resource(ReqData, Context) ->
 % This is only called after a successful delete_resource call, and should 
 % return false if the deletion was accepted but cannot yet be guaranteed to have finished.
 %
+
 delete_completed(ReqData, Context) ->
 	{true, ReqData, Context}.
 %
@@ -223,7 +224,7 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
-	{Info, List} = etop(Node),
+	{Info, List} = etop(wrq:path_info(id, ReqData)),
 	{ok,Content} = etop_dtl:render([{node, Node},{info, Info},{list, List}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		

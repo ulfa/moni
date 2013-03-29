@@ -2,7 +2,6 @@
 <title>{% block title %}etop{% endblock %}</title>
 {% block body %}
 <div class="container">
-
 	<div class="row-fluid">
 		<div class="span3">		
 			<div class="well">		
@@ -43,7 +42,7 @@
 						<tr>
 							{% for k, v in proc %}
 							{% ifequal k "pid" %}
-    						<td><a href="/etop/{{node}}/{{v}}">{{v}}</a></td>
+    						<td><a href="/process_info/{{node}}/{{v}}">{{v}}</a></td>
     						{% else %}
     						<td>{{v}}</td>
 							{% endifequal %}						
