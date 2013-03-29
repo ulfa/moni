@@ -9,6 +9,9 @@
 		},
 		{
 			"path": "priv/www/static/css"
+		},
+		{
+			"path": "priv"
 		}
 	]
 }
