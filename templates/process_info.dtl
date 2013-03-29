@@ -1,0 +1,32 @@
+{% extends "base.dtl" %}
+
+<title>{% block title %}{{node}}/{{pid}}{% endblock %}</title>
+{% block body %}
+<div class="well">
+<table class="table ">		
+	<thead>
+		<tr>
+			<th>Key</th>
+			<th>Value</th>
+		</tr>
+	</thead>
+	<tbody>						
+		{% for k,v in info %}								
+		<tr>			
+			<td>{{k}}</td>
+		{% ifequal k "links" %}		
+			<td>
+			{% for p in v%}
+			<a href="/process_info/{{node}}/{{p}}">{{p}}</a>
+			{% endfor %}	
+			</td>
+			{% else %}
+				<td>{{v}}</td>
+			{% endifequal %}						
+		</tr>	
+		{% endfor %}
+	</tbody>
+	<tr><td><a class="btn btn-primary" href="/etop/{{node}}">zurück</a></td></tr>					
+</table>
+{% endblock %}
+</div>
