@@ -36,8 +36,9 @@
 %% --------------------------------------------------------------------
 %%% Internal functions
 %% --------------------------------------------------------------------
-init(_Config) -> 
-	{ok, #context{}}.
+init(Config) -> 
+	{{trace, "/tmp"}, Config}.
+	%%{ok, #context{}}.
 %
 % Returning non-true values will result in 404 Not Found.
 % 
@@ -222,7 +223,7 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = nodes_dtl:render([{nodes, get_nodes()}]),
+	{ok, Content} = nodes_dtl:render([{nodes, get_nodes()}, {links, create_links()}]),
 	{Content, ReqData, Context}.  
 to_json(ReqData, Context) ->		
 	Content = "json",
@@ -231,6 +232,9 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------	  
+create_links() ->
+	[
+	].
 get_nodes() ->
 	sue:get_children().
 %% --------------------------------------------------------------------

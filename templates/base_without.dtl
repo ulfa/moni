@@ -40,23 +40,14 @@
 					</div>
 				</div>	
 			</div>
-		</div>	
-		<div class="container">	
-			<div class="row-fluid">				
-				<div class="span2">					
-					<ul class="nav nav-tabs nav-stacked">
-					{% block sidebar %}
-						{% for link, name in links %}								
-						<li><a href={{link}}>{{name}}</a></li>
-						{% endfor %}
-        			{% endblock %}        			
-        			</ul>
-				</div>
-				<div class="span10">
-      			{% block body %}{% endblock %}
-    			</div>
-    		</div>
-    	</div>
-    </div>
-</body>
+			{% block body %}{% endblock %}
+	
+	</body>
+
+		<!--footer>
+			<div class="well">
+				Das ist ein Test
+			</div>
+		</footer-->
+	</div>	
 </html>

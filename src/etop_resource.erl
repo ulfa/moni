@@ -225,7 +225,7 @@ finish_request(ReqData, Context) ->
 to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
 	{Info, List} = etop(wrq:path_info(id, ReqData)),
-	{ok,Content} = etop_dtl:render([{node, Node},{info, Info},{list, List}]),
+	{ok,Content} = etop_dtl:render([{node, Node},{info, Info},{list, List}, {links, create_links(Node)}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Content = "json",
@@ -233,6 +233,12 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[
+		{"/memory/" ++ Node, "Memory"},	
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 etop(Node) when is_list(Node)->
 	sue:etop(list_to_atom(Node)).
 %% --------------------------------------------------------------------

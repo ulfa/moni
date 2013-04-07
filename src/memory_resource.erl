@@ -222,7 +222,8 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = memory_dtl:render([{node, wrq:path_info(id, ReqData)}]),
+	Node = wrq:path_info(id, ReqData),
+	{ok, Content} = memory_dtl:render([{node, Node}, {links, create_links(Node)}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Result = get_memory(wrq:path_info(id, ReqData)),
@@ -231,6 +232,12 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[	
+		{"/etop/" ++ Node, "etop"},
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),
 	

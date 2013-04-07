@@ -223,7 +223,7 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
-	{ok, Content} = appmon_dtl:render([{apps, get_applications(Node)}]),
+	{ok, Content} = appmon_dtl:render([{apps, get_applications(Node)}, {links, create_links(Node)}, {node, Node}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Node = wrq:path_info(id, ReqData),	
@@ -233,6 +233,12 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[
+		{"/memory/" ++ Node, "Memory"},
+		{"/etop/" ++ Node, "etop"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 get_applications(Node) when is_list(Node)->
 	sue:get_applications(list_to_atom(Node)).
 result_to_json(Result) ->

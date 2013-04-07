@@ -1,9 +1,9 @@
-{% extends "base.dtl" %}
+{% extends "base_without.dtl" %}
 
-<title>{% block title %}Nodes Overview{% endblock %}</title>
+{% block title %}Nodes Overview{% endblock %}
 
 {% block body %}
-<div class="container">
+
 	<div class="well">
 		<table class="table">  
         	<thead>  
@@ -17,14 +17,19 @@
 			{% for node, detail in nodes %}		
 			<tbody>  
 				<tr>  
-					<td><a href="/nodes/{{ node }}">{{ node }}</a></td>  
+					<td><a href="/sysinfo/{{ node }}">{{ node }}</a></td>  
 					{% for Key, Value in detail %}
 					<td>{{ Value }}</td>  
 					{% endfor %}
+					<td>
+						<form method="post" action="/node/{{node}}" action="delete">
+							<input type="submit" class="btn btn-danger btn-small" value="l&#246;schen">
+						</form>
+					</td>
 				</tr>  
 			</tbody>
 			{% endfor %}
 		</table>
 	</div>
-</div>
+
 {% endblock %}

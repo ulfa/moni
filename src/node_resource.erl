@@ -24,6 +24,7 @@
 %% External exports
 %% --------------------------------------------------------------------
 -export([init/1, content_types_provided/2, allowed_methods/2, resource_exists/2]).
+-export([process_post/2]).
 -export([to_json/2, to_html/2]).
 %% --------------------------------------------------------------------
 %% Include files
@@ -93,7 +94,7 @@ valid_content_headers(ReqData, Context) ->
 % will be sent. Note that these are all-caps and are atoms. (single-quoted)
 %
 allowed_methods(ReqData, Context) ->
-    {['GET'], ReqData, Context}.
+    {['GET', 'POST'], ReqData, Context}.
 %
 % This is called when a DELETE request should be enacted 
 % and should return true if the deletion succeeded.
@@ -128,6 +129,7 @@ create_path(ReqData, Context) ->
 % If it succeeds, it should return true.
 %
 process_post(ReqData, Context) ->
+	lager:info("1... ~p~n", [ReqData]),
 	{false, ReqData, Context}.
 %
 % This should return a list of pairs where each pair is of the form {Mediatype, Handler} 
@@ -222,15 +224,22 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = node_dtl:render([]),
+	Node = wrq:path_info(id, ReqData),
+	{ok, Content} = node_dtl:render([{node, Node}, {links, create_links(Node)}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
-	Content = "json",
+	Content = "json not ready yet",
 	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
-
+create_links(Node) ->
+	[
+		{"/memory/" ++ Node, "Memory"},
+		{"/etop/" ++ Node, "Etop"},
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------

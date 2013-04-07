@@ -225,18 +225,24 @@ to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
 	Pid = wrq:path_info(pid, ReqData),	
 	Info = get_pid_info(list_to_atom(Node), mochiweb_util:unquote(Pid)), 
-	{ok, Content} = process_info_dtl:render([{node, Node},{pid, Pid}, {info, Info}]),
+	{ok, Content} = process_info_dtl:render([{node, Node},{pid, Pid}, {info, Info}, {links, create_links(Node)}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->	
 	Node = wrq:path_info(id, ReqData),
 	Pid = wrq:path_info(pid, ReqData),		
 	Result = get_pid_info(list_to_atom(Node), mochiweb_util:unquote(Pid)),
-	io:format("... ~p~n", [Result]), 
 	Content = result_to_json(Result),
 	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[
+		{"/memory/" ++ Node, "Memory"},
+		{"/etop/" ++ Node, "Etop"},
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 etop(Node) when is_list(Node)->
 	sue:etop(list_to_atom(Node)).
 

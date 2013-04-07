@@ -222,8 +222,10 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	Result = get_sysinfo(wrq:path_info(id, ReqData)),
-	{ok, Content} = sysinfo_dtl:render([{sysinfos, Result}]),
+	Node = wrq:path_info(id, ReqData),
+	Result = get_sysinfo(Node),	
+	Sysinfo = insert_comments(Result, read_sysinfo(), []),
+	{ok, Content} = sysinfo_dtl:render([{sysinfos, Sysinfo}, {links, create_links(Node)}, {node, Node}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->
 	Result = get_sysinfo(wrq:path_info(id, ReqData)),
@@ -232,6 +234,12 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[
+		{"/memory/" ++ Node, "Memory"},	
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/etop/" ++ Node, "Etop"}
+	].
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),
 	jsx:encode(Jsx_input).
@@ -240,9 +248,28 @@ get_sysinfo(Node) when is_list(Node)->
 	get_sysinfo(erlang:list_to_atom(Node));
 get_sysinfo(Node) ->
 	sue:sys_info(Node).
+
+insert_comments(Input) ->
+	Comments = read_sysinfo(),
+	ok.
+
+read_sysinfo() ->
+	{ok, Infos}=file:consult(code:priv_dir(moni) ++ "/config" ++ "/sysinfo.conf"),
+	Infos.
+
+insert_comments([], Comments, Acc) ->
+	lists:reverse(Acc);
+insert_comments([{Key, Value}|T], Comments, Acc) ->
+	insert_comments(T, Comments, [{Key, Value, proplists:get_value(Key, Comments, "no info available")}|Acc]).
+
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
 -include_lib("eunit/include/eunit.hrl").
 -ifdef(TEST).
+insert_comments_test()->
+	SI = get_sysinfo('moni@ua-TA880GB'),
+
+	insert_comments(SI, read_sysinfo(), []).
+
 -endif.
