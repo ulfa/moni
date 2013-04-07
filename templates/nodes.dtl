@@ -1,6 +1,6 @@
 {% extends "base_without.dtl" %}
 
-{% block title %}Nodes Overview{% endblock %}
+{% block title %}Nodes Overiew{% endblock %}
 
 {% block body %}
 

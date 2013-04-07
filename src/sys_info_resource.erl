@@ -236,9 +236,11 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[
+		{"/nodes/" ++ Node, "Nodes"},	
 		{"/memory/" ++ Node, "Memory"},	
 		{"/appmon/" ++ Node, "Appmon"},
 		{"/etop/" ++ Node, "Etop"}
+
 	].
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),

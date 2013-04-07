@@ -234,6 +234,7 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[	
+		{"/nodes/" ++ Node, "Nodes"},
 		{"/etop/" ++ Node, "etop"},
 		{"/appmon/" ++ Node, "Appmon"},
 		{"/sysinfo/" ++ Node, "SysInfo"}

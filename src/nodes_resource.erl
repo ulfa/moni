@@ -223,7 +223,8 @@ finish_request(ReqData, Context) ->
 %%% Additional functions
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
-	{ok, Content} = nodes_dtl:render([{nodes, get_nodes()}, {links, create_links()}]),
+	Node = wrq:path_info(id, ReqData),
+	{ok, Content} = nodes_dtl:render([{nodes, get_nodes(Node)}, {links, create_links()}]),
 	{Content, ReqData, Context}.  
 to_json(ReqData, Context) ->		
 	Content = "json",
@@ -235,8 +236,11 @@ to_json(ReqData, Context) ->
 create_links() ->
 	[
 	].
-get_nodes() ->
-	sue:get_children().
+get_nodes(undefined) ->
+	get_nodes(node());	
+get_nodes(Node) ->
+	lager:info("..... node : ~p", [Node]),
+	sue:get_children(list_to_atom(Node)).
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------

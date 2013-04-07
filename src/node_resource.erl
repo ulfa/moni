@@ -129,7 +129,6 @@ create_path(ReqData, Context) ->
 % If it succeeds, it should return true.
 %
 process_post(ReqData, Context) ->
-	lager:info("1... ~p~n", [ReqData]),
 	{false, ReqData, Context}.
 %
 % This should return a list of pairs where each pair is of the form {Mediatype, Handler} 
@@ -235,6 +234,7 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[
+		{"/nodes/" ++ Node, "Nodes"},
 		{"/memory/" ++ Node, "Memory"},
 		{"/etop/" ++ Node, "Etop"},
 		{"/appmon/" ++ Node, "Appmon"},
