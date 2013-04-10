@@ -225,8 +225,7 @@ to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
 	App = wrq:path_info(app, ReqData),	
 	Info = get_app_info(Node, App),
-	io:format("~p~n", [Info]),
-	{ok, Content} = app_dtl:render([{links, []},{app, App},{apps, Info}]),
+	{ok, Content} = app_dtl:render([{links, create_links(Node)},{app, App},{apps, Info}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Node = wrq:path_info(id, ReqData),	
@@ -235,6 +234,14 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
+create_links(Node) ->
+	[
+		{"/nodes/" ++ Node, "Nodes"},
+		{"/memory/" ++ Node, "Memory"},
+		{"/etop/" ++ Node, "etop"},
+		{"/appmon/" ++ Node, "Appmon"},
+		{"/sysinfo/" ++ Node, "SysInfo"}
+	].
 get_applications(Node) when is_list(Node)->
 	sue:get_applications(list_to_atom(Node)).
 
