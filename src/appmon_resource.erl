@@ -241,7 +241,9 @@ create_links(Node) ->
 		{"/sysinfo/" ++ Node, "SysInfo"}
 	].
 get_applications(Node) when is_list(Node)->
-	sue:get_applications(list_to_atom(Node)).
+	A= sue:get_applications(list_to_atom(Node)),
+	lager:info("... ~p", [A]),
+	A.
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),	
 	jsx:encode(Jsx_input).

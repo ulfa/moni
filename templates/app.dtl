@@ -1,7 +1,7 @@
-
+{% extends "base.dtl" %}
 <title>{% block title %}Detail: {{app}}{% endblock %}</title>
-{% block body %}
 
+{% block body %}        
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">
   google.load('visualization', '1', {packages: ['orgchart']});
@@ -21,9 +21,7 @@
         new google.visualization.OrgChart(document.getElementById('app')).
         draw(data, {allowHtml: true, size: 'large'});
   }
-	  	  
+
 </script>
-  <div class="container">
-    <div id="app"></div>
-  </div>
+    <div id="app"></div> 
 {% endblock %}

@@ -15,10 +15,9 @@
          var data = new google.visualization.DataTable();
         data.addColumn('string', 'App');
         data.addColumn('string', 'Parent');
-        data.addColumn('string', 'ToolTip');
-        
-		{% for app, parent in apps %}
-			data.addRow([{v:'{{app}}', f:'<a href=/app/{{parent}}/{{app}}>{{app}}</a>'}, '{{parent}}','test']);
+        data.addColumn('string', 'ToolTip');        
+		{% for app, version, tool, parent in apps %}         
+			data.addRow([{v:'{{app}}', f:'<a href=/app/{{parent}}/{{app}}>{{app}}<br>{{version}}</a>'}, '{{parent}}','{{tool}}']);
 		{% endfor %}
 			
         // Create and draw the visualization.					
