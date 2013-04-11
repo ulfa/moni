@@ -2,3 +2,11 @@
     height: 400px !important;
     overflow: scroll;
 }​
+
+#table{
+ border-collapse:separate !important;
+}
+.google-visualization-orgchart-table
+{
+    border-collapse:separate !important;
+}

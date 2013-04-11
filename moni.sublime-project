@@ -2,16 +2,7 @@
 	"folders":
 	[
 		{
-			"path": "src"
-		},
-		{
-			"path": "templates"
-		},
-		{
-			"path": "priv/www/static/css"
-		},
-		{
-			"path": "priv"
+			"path": "/Users/ulfangermann/Dropbox/projects/erlang/moni"
 		}
 	]
 }
