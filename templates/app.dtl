@@ -9,12 +9,12 @@
   function drawVisualization() {
   // Create and populate the data table.
     var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Process');
     data.addColumn('string', 'App');
-    data.addColumn('string', 'Parent');
     data.addColumn('string', 'ToolTip');
         
-		{% for app, parent in apps %}
-			data.addRow([{v:'{{app}}', f:'<a href={{app}}>{{app}}</a>'}, '{{parent}}','test']),
+		{% for process, parent in processes %}
+			data.addRow([{v:'{{process}}', f:'<a href=/process_info/{{node}}/{{process|escape}}>{{process|escape}}</a>'}, '{{parent}}','test']),
 		{% endfor %}
 			
     // Create and draw the visualization.					      
