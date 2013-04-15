@@ -225,7 +225,7 @@ to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
 	App = wrq:path_info(app, ReqData),	
 	Info = get_app_info(Node, App),
-	{ok, Content} = app_dtl:render([{links, create_links(Node)},{app, App},{apps, Info}]),
+	{ok, Content} = app_dtl:render([{links, create_links(Node)},{node, Node},{app, App},{processes, Info}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
 	Node = wrq:path_info(id, ReqData),	
