@@ -240,8 +240,12 @@ create_links(Node) ->
 		{"/etop/" ++ Node, "etop"},
 		{"/sysinfo/" ++ Node, "SysInfo"}
 	].
+
 get_applications(Node) when is_list(Node)->
-	sue:get_applications(list_to_atom(Node)).
+	case rpc:call(list_to_atom(Node), sue, get_applications, [list_to_atom(Node)]) of
+		{badrpc,nodedown} -> [];
+		Any -> Any
+	end. 
 
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),	
