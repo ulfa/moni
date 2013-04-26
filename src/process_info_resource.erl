@@ -20,6 +20,9 @@
 %%% -------------------------------------------------------------------
 -module(process_info_resource).
 
+-include("../include/moni.hrl").
+
+
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
@@ -238,11 +241,11 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[
-		{"/nodes/" ++ Node, "Nodes"},
-		{"/memory/" ++ Node, "Memory"},
-		{"/etop/" ++ Node, "Etop"},
-		{"/appmon/" ++ Node, "Appmon"},
-		{"/sysinfo/" ++ Node, "SysInfo"}
+		?NODES(Node),
+		?MEMORY(Node),
+		?ETOP(Node),
+		?APPMON(Node),
+		?SYSINFO(Node)
 	].
 etop(Node) when is_list(Node)->
 	sue:etop(list_to_atom(Node)).

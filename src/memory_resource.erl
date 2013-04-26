@@ -20,6 +20,9 @@
 %%% -------------------------------------------------------------------
 -module(memory_resource).
 
+-include("../include/moni.hrl").
+
+
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
@@ -234,10 +237,10 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[	
-		{"/nodes/" ++ Node, "Nodes"},
-		{"/etop/" ++ Node, "etop"},
-		{"/appmon/" ++ Node, "Appmon"},
-		{"/sysinfo/" ++ Node, "SysInfo"}
+		?NODES(Node),
+		?ETOP(Node),
+		?APPMON(Node),
+		?SYSINFO(Node)
 	].
 result_to_json(Result) ->
 	Jsx_input = converter:proplists_to_jsx_input(Result),

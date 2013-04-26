@@ -20,6 +20,8 @@
 %%% -------------------------------------------------------------------
 -module(appmon_resource).
 
+-include("../include/moni.hrl").
+
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
@@ -235,10 +237,10 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[
-		{"/nodes/" ++ Node, "Nodes"},
-		{"/memory/" ++ Node, "Memory"},
-		{"/etop/" ++ Node, "etop"},
-		{"/sysinfo/" ++ Node, "SysInfo"}
+		?NODES(Node),
+		?MEMORY(Node),
+		?ETOP(Node),
+		?SYSINFO(Node)
 	].
 
 get_applications(Node) when is_list(Node)->

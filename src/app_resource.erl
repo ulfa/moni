@@ -20,6 +20,9 @@
 %%% -------------------------------------------------------------------
 -module(app_resource).
 
+-include("../include/moni.hrl").
+
+
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
@@ -236,11 +239,11 @@ to_json(ReqData, Context) ->
 %% --------------------------------------------------------------------
 create_links(Node) ->
 	[
-		{"/nodes/" ++ Node, "Nodes"},
-		{"/memory/" ++ Node, "Memory"},
-		{"/etop/" ++ Node, "etop"},
-		{"/appmon/" ++ Node, "Appmon"},
-		{"/sysinfo/" ++ Node, "SysInfo"}
+		?NODES(Node),
+		?MEMORY(Node),
+		?ETOP(Node),
+		?APPMON(Node),
+		?SYSINFO(Node)
 	].
 get_applications(Node) when is_list(Node)->
 	sue:get_applications(list_to_atom(Node)).

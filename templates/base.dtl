@@ -47,7 +47,7 @@
 				<div class="span2">					
 					<ul class="nav nav-tabs nav-stacked">
 					{% block sidebar %}
-						{% for link, name in links %}								
+						{% for ref, link, name in links %}								
 						<li><a href={{link}}>{{name}}</a></li>
 						{% endfor %}
         			{% endblock %}        			

@@ -1,14 +1,7 @@
 {% extends "base.dtl" %}
 {% block title %}etop: {{node}}{% endblock %}
 
-{% block sidebar %}
-	{% for link, name in links %}								
-		<li><a href={{link}}>{{name}}</a></li>
-	{% endfor %}
-{% endblock %}
-
-{% block body %}
-	
+{% block body %}	
 			<div class="well scroller">
 				<table class="table table-hover table-condensed">
 					<thead>
