@@ -221,39 +221,7 @@ generate_etag(ReqData, Context) ->
 %
 finish_request(ReqData, Context) ->
 	{true, ReqData, Context}.
-%% --------------------------------------------------------------------
-%%% Additional functions
-%% --------------------------------------------------------------------
-to_html(ReqData, Context) ->
-	Node = wrq:path_info(id, ReqData),
-	App = wrq:path_info(app, ReqData),	
-	Info = get_app_info(Node, App),
-	{ok, Content} = app_dtl:render([{links, create_links(Node)},{node, Node},{app, App},{processes, Info}]),
-	{Content, ReqData, Context}.    
-to_json(ReqData, Context) ->		
-	Node = wrq:path_info(id, ReqData),	
-	Content = "result_to_json(Result),",
-	{Content, ReqData, Context}.    
-%% --------------------------------------------------------------------
-%%% internal functions
-%% --------------------------------------------------------------------
-create_links(Node) ->
-	[
-		?NODES(Node),
-		?MEMORY(Node),
-		?ETOP(Node),
-		?APPMON(Node),
-		?SYSINFO(Node)
-	].
-get_applications(Node) when is_list(Node)->
-	sue:get_applications(list_to_atom(Node)).
 
-result_to_json(Result) ->
-	Jsx_input = converter:proplists_to_jsx_input(Result),	
-	jsx:encode(Jsx_input).
-
-get_app_info(Node, App) ->
-	node:get_app_info(list_to_atom(Node), list_to_atom(App)). 
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
