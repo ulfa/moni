@@ -19,6 +19,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/memory_resource.erl",
+			"settings":
+			{
+				"buffer_size": 9701,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "LICENSE",
+			"settings":
+			{
+				"buffer_size": 1079,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/Erlang/Erlang.sublime-build",
 	"command_palette":
@@ -48,29 +64,33 @@
 	},
 	"file_history":
 	[
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/app.dtl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/etop_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/etop.dtl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/appmon_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/moni.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/base.dtl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/app_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/memory_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/node_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/process_info_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/sys_info_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/nodes_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/include/moni.hrl",
+		"/Users/ulfangermann/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/ulfangermann/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/app.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/www/static/css/application.css",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/rebar.config",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/app_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/moni.app.src",
 		"/Users/ulfangermann/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/appmon.dtl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/appmon_resource.erl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/sys_info_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/sysinfo.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/www/static/config/sysinfo.conf",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/etop.dtl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/nodes_resource.erl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/node_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/nodes.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/base_without.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/config/sysinfo.conf",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/start.sh",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/process_info_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/memory.dtl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/etop_resource.erl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/memory_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/node.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/process_info.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/dispatch.conf",
@@ -81,7 +101,7 @@
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -95,6 +115,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n	",
 			"This"
 		],
 		"highlight": true,
@@ -113,8 +134,62 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/memory_resource.erl",
+					"settings":
+					{
+						"buffer_size": 9701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9333,
+								9333
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Erlang/Erlang.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3007.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "LICENSE",
+					"settings":
+					{
+						"buffer_size": 1079,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1011
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -124,7 +199,7 @@
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 33.0
 	},
 	"layout":
 	{

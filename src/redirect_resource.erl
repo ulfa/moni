@@ -18,7 +18,7 @@
 %%%
 %%% Created : 
 %%% -------------------------------------------------------------------
--module(memory_resource).
+-module(redirect_resource).
 
 -include("../include/moni.hrl").
 
@@ -26,8 +26,7 @@
 %% --------------------------------------------------------------------
 %% External exports
 %% --------------------------------------------------------------------
--export([init/1, content_types_provided/2, allowed_methods/2, resource_exists/2]).
--export([to_json/2, to_html/2]).
+-export([init/1, allowed_methods/2, resource_exists/2, moved_permanently/2, previously_existed/2]).
 %% --------------------------------------------------------------------
 %% Include files
 %% --------------------------------------------------------------------
@@ -39,13 +38,14 @@
 %% --------------------------------------------------------------------
 %%% Internal functions
 %% --------------------------------------------------------------------
-init(_Config) -> 
-	{ok, #context{}}.
+init(Config) -> 
+	{{trace, "/tmp"}, Config}.
+	%%{ok, #context{}}.
 %
 % Returning non-true values will result in 404 Not Found.
 % 
 resource_exists(ReqData, Context) ->
-	{true, ReqData, Context}.
+	{false, ReqData, Context}.
 
 %
 % true, if the service is available
@@ -141,7 +141,7 @@ process_post(ReqData, Context) ->
 % return tuples, then a 406 Not Acceptable will be sent.
 % 
 content_types_provided(ReqData, Context) ->
-    {[{"text/html", to_html}, {"application/json", to_json}],ReqData, Context}.
+    {[],ReqData, Context}.
 %
 % This is used similarly to content_types_provided, except that it is for incoming 
 % resource representations -- for example, PUT requests. Handler functions usually 
@@ -189,12 +189,12 @@ multiple_choices(ReqData, Context) ->
 
 
 previously_existed(ReqData, Context) ->
-	{false, ReqData, Context}.
+	{true, ReqData, Context}.
 %
 % {true, MovedURI} | false
 %
 moved_permanently(ReqData, Context) ->
-	{false, ReqData, Context}.
+	{{true, "/nodes/" ++ atom_to_list(node())}, ReqData, Context}.
 %
 % {true, MovedURI} | false
 %
@@ -204,7 +204,7 @@ moved_temporarily(ReqData, Context) ->
 % undefined | YYYY,MM,DD, Hour,Min,Sec
 %
 last_modified(ReqData, Context) ->
-	{undefined, ReqData, Context}.
+	{{true, "/nodes/" ++ node()}, ReqData, Context}.
 %
 % undefined | YYYY,MM,DD, Hour,Min,Sec 
 %
@@ -226,29 +226,34 @@ finish_request(ReqData, Context) ->
 %% --------------------------------------------------------------------
 to_html(ReqData, Context) ->
 	Node = wrq:path_info(id, ReqData),
-	{ok, Content} = memory_dtl:render([{node, Node}, {links, create_links(Node)}]),
+	App = wrq:path_info(app, ReqData),	
+	Info = get_app_info(Node, App),
+	{ok, Content} = app_dtl:render([{links, create_links(Node)},{node, Node},{app, App},{processes, Info}]),
 	{Content, ReqData, Context}.    
 to_json(ReqData, Context) ->		
-	Result = get_memory(wrq:path_info(id, ReqData)),
-	Content = result_to_json(Result),
+	Node = wrq:path_info(id, ReqData),	
+	Content = "result_to_json(Result),",
 	{Content, ReqData, Context}.    
 %% --------------------------------------------------------------------
 %%% internal functions
 %% --------------------------------------------------------------------
 create_links(Node) ->
-	[	
+	[
 		?NODES(Node),
+		?MEMORY(Node),
 		?ETOP(Node),
 		?APPMON(Node),
 		?SYSINFO(Node)
 	].
+get_applications(Node) when is_list(Node)->
+	sue:get_applications(list_to_atom(Node)).
+
 result_to_json(Result) ->
-	Jsx_input = converter:proplists_to_jsx_input(Result),
+	Jsx_input = converter:proplists_to_jsx_input(Result),	
 	jsx:encode(Jsx_input).
-get_memory(Node) when is_list(Node)->
-	get_memory(erlang:list_to_atom(Node));	
-get_memory(Node) ->
-	sue:memory(Node).
+
+get_app_info(Node, App) ->
+	node:get_app_info(list_to_atom(Node), list_to_atom(App)). 
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
