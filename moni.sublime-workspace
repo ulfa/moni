@@ -20,18 +20,26 @@
 	"buffers":
 	[
 		{
-			"file": "src/memory_resource.erl",
+			"file": "apps/moni/src/moni.erl",
 			"settings":
 			{
-				"buffer_size": 9701,
+				"buffer_size": 1380,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "LICENSE",
+			"file": "apps/moni/src/nodes_resource.erl",
 			"settings":
 			{
-				"buffer_size": 1079,
+				"buffer_size": 9440,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "apps/moni/templates/base.dtl",
+			"settings":
+			{
+				"buffer_size": 2167,
 				"line_ending": "Unix"
 			}
 		}
@@ -64,16 +72,19 @@
 	},
 	"file_history":
 	[
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/config/sysinfo.conf",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/config/info.conf",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/sys_info_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/memory_resource.erl",
+		"/Users/ulfangermann/Dropbox/projects/erlang/moni/LICENSE",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/etop_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/etop.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/appmon_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/moni.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/base.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/app_resource.erl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/memory_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/node_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/process_info_resource.erl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/sys_info_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/src/nodes_resource.erl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/include/moni.hrl",
 		"/Users/ulfangermann/Library/Application Support/Sublime Text 2/Packages/Default/Default (OSX).sublime-keymap",
@@ -88,7 +99,6 @@
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/www/static/config/sysinfo.conf",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/nodes.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/base_without.dtl",
-		"/Users/ulfangermann/Dropbox/projects/erlang/moni/priv/config/sysinfo.conf",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/start.sh",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/memory.dtl",
 		"/Users/ulfangermann/Dropbox/projects/erlang/moni/templates/node.dtl",
@@ -134,23 +144,49 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/memory_resource.erl",
+					"file": "apps/moni/src/moni.erl",
 					"settings":
 					{
-						"buffer_size": 9701,
+						"buffer_size": 1380,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9333,
-								9333
+								1179,
+								1179
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Erlang/Erlang.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "apps/moni/src/nodes_resource.erl",
+					"settings":
+					{
+						"buffer_size": 9440,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9174,
+								9174
 							]
 						],
 						"settings":
@@ -159,33 +195,33 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3007.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "LICENSE",
+					"buffer": 2,
+					"file": "apps/moni/templates/base.dtl",
 					"settings":
 					{
-						"buffer_size": 1079,
+						"buffer_size": 2167,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								1011
+								1905,
+								1905
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 127.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

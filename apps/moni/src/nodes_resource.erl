@@ -239,7 +239,6 @@ create_links() ->
 get_nodes(undefined) ->
 	get_nodes(node());	
 get_nodes(Node) ->
-	lager:info("..... node : ~p", [Node]),
 	sue:get_children(list_to_atom(Node)).
 %% --------------------------------------------------------------------
 %%% Test functions

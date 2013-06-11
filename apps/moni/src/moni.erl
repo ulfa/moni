@@ -36,7 +36,7 @@ start() ->
 	ensure_started(crypto),
   ensure_started(lager),
 	ensure_started(mochiweb),
-	application:set_env(webmachine, webmachine_logger_module, webmachine_logger),
+	%%application:set_env(webmachine, webmachine_logger_module, webmachine_logger),
 	ensure_started(webmachine),
 	ensure_started(sue),	
 	application:start(?MODULE).
