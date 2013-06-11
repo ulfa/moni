@@ -11,7 +11,9 @@
 				  <th>Node Name</th>  
 				  <th>Ip</th>  
 				  <th>Status</th>  
-				  <th>Last update</th>  
+				  <th>Last update</th>
+				  <th>Reason</th>
+				  <th>Action</th>
 			  </tr>  
 			</thead>  
 			{% for node, detail in nodes %}		
