@@ -9,7 +9,7 @@
         	<thead>  
           	  <tr>  
 				  <th>Node Name</th>  
-				  <th>Ip</th>  
+				  <th>Ip address</th>  
 				  <th>Status</th>  
 				  <th>Last update</th>
 				  <th>Reason</th>
