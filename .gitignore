@@ -4,3 +4,4 @@ apps/moni/ebin/*
 .eunit/
 deps
 rel/moni
+.ct_dialyzer.plt
