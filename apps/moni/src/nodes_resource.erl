@@ -239,10 +239,26 @@ create_links() ->
 get_nodes(undefined) ->
 	get_nodes(node());	
 get_nodes(Node) ->
-	sue:get_children(list_to_atom(Node)).
+	get_nodes1(sue:get_children(list_to_atom(Node)), []).
+
+get_nodes1([], Acc) ->
+	Acc;
+get_nodes1([{Name, Details}|Nodes], Acc) ->
+	State = proplists:get_value(state, Details), 
+	get_nodes1(Nodes, [{Name, State, Details}]).
+
 %% --------------------------------------------------------------------
 %%% Test functions
 %% --------------------------------------------------------------------
 -include_lib("eunit/include/eunit.hrl").
 -ifdef(TEST).
+
+get_nodes1_test() ->
+	T = [{<<"moni@raspberrypi">>,
+  		[{ip,"192.168.178.45"},
+   		{state,<<"Unknown">>},
+   		{time,"2013-06-14 05:56:09"},
+   		{reason,[]}]}],
+   	get_nodes1(T, []).
+
 -endif.

@@ -16,10 +16,14 @@
 				  <th>Action</th>
 			  </tr>  
 			</thead>  
-			{% for node, detail in nodes %}		
+			{% for node, state, detail in nodes %}		
 			<tbody>  
-				<tr>  
+				<tr> 
+					{% ifequal state "Alive" %} 
 					<td><a href="/sysinfo/{{ node }}">{{ node }}</a></td>  
+					{% else %}
+					<td> {{node}} </td>
+					{% endifequal %}
 					{% for Key, Value in detail %}
 					<td>{{ Value }}</td>  
 					{% endfor %}
