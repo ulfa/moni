@@ -13,6 +13,7 @@
 				  <th>Status</th>  
 				  <th>Last update</th>
 				  <th>Reason</th>
+				  
 			  </tr>  
 			</thead>  
 			{% for node, state, detail in nodes %}		
