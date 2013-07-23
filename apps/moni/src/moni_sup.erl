@@ -1,4 +1,11 @@
+%% Copyright (c) 2013 Ulf Angermann
+%% See MIT-LICENSE for licensing information.
 
+%%% -------------------------------------------------------------------
+%%% Author  : Ulf Angermann uaforum1@googlemail.com
+%%% Description :
+%%%
+%%% Created : 
 -module(moni_sup).
 
 -behaviour(supervisor).
@@ -33,7 +40,6 @@ init([]) ->
     WebConfig = [
                  {ip, Ip},
                  {port, 8000},
-                 {log_dir, "priv/log"},
                  {dispatch, Dispatch}],
     Web = {webmachine_mochiweb, {webmachine_mochiweb, start, [WebConfig]}, permanent, 5000, worker, dynamic},
     Processes = [Web],
