@@ -22,8 +22,9 @@ $ ./dev.sh
 ** Note: ** 
 
 For development i use the dev.sh script. In this script i start the app toolbar which i can't start on the servers.
-
 On my test servers i use the prod.sh script which doesn't start the tools, only the needed applications. 
+
+Type in your browser http://localhost:8000
 
 ## Dependencies
 
