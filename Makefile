@@ -3,8 +3,8 @@ DIALYZER = dialyzer
 REBAR = rebar
 TAR = tar
 CD = cd
-REPO = ../../../repository
-REPOSRC = ../repository
+REPO = ../../../../repository
+REPOSRC = ../../repository
 
 all: app
 
@@ -12,7 +12,7 @@ tar: app
 	$(CD) rel; tar cvf $(REPO)/$(PROJECT).$(VERSION).tar $(PROJECT)
 
 tarall: app 
-	$(CD) ..; $(TAR) cvf $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(PROJECT) 
+	$(CD) ..; $(TAR) cvf $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(PROJECT) --exclude .git/* --exclude log/*
 
 cpall: tarall
 	$(CD) ..;scp $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(USR)@$(HOST):~/projects/erlang
