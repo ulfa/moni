@@ -1,6 +1,7 @@
 # Overview
 
-This application is the graphical interface for sue.
+This application is the graphical interface for sue. 
+If you want to know more about sue, please look here : https://github.com/ulfa/sue
 
 ## Feature
 
