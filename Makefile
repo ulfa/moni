@@ -12,10 +12,11 @@ tar: app
 	$(CD) rel; tar cvf $(REPO)/$(PROJECT).$(VERSION).tar $(PROJECT)
 
 tarall: app 
-	$(CD) ..; $(TAR) cvf $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(PROJECT) --exclude .git/* --exclude log/*
+	$(CD) ..; $(TAR) cf $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(PROJECT) --exclude .git/* --exclude log/*
 
 cpall: tarall
 	$(CD) ..;scp $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(USR)@$(HOST):~/projects/erlang
+	ssh $(USR)@$(HOST) 'cd $(TARGET); tar xvf $(TARGET)/$(PROJECT).src.$(VERSION).tar'
 
 cp: tar
 	@$(CD) ..;scp $(REPOSRC)/$(PROJECT).$(VERSION).tar $(USR)@$(HOST):~/projects/erlang
