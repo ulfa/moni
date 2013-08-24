@@ -5,6 +5,7 @@ TAR = tar
 CD = cd
 REPO = ../../../../repository
 REPOSRC = ../../repository
+TARGET = ~/projects/erlang
 
 all: app
 
@@ -16,8 +17,7 @@ tarall: app
 
 cpall: tarall
 	$(CD) ..;scp $(REPOSRC)/$(PROJECT).src.$(VERSION).tar $(USR)@$(HOST):~/projects/erlang
-	ssh $(USR)@$(HOST) 'cd $(TARGET); tar xvf $(TARGET)/$(PROJECT).src.$(VERSION).tar'
-
+	ssh $(USR)@$(HOST) 'cd $(TARGET); tar xf $(TARGET)/$(PROJECT).src.$(VERSION).tar'
 cp: tar
 	@$(CD) ..;scp $(REPOSRC)/$(PROJECT).$(VERSION).tar $(USR)@$(HOST):~/projects/erlang
 
