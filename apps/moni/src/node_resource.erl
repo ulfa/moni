@@ -17,6 +17,7 @@
 -export([init/1, content_types_provided/2, allowed_methods/2, resource_exists/2]).
 -export([process_post/2]).
 -export([to_json/2, to_html/2]).
+-export([is_authorized/2]).
 %% --------------------------------------------------------------------
 %% Include files
 %% --------------------------------------------------------------------
@@ -47,7 +48,7 @@ service_available(ReqData, Context) ->
 % The AuthHead return value will be used as the value in the WWW-Authenticate header.
 %
 is_authorized(ReqData, Context) ->
-	{true, ReqData, Context}.
+	login:login(ReqData, Context).
 
 forbidden(ReqData, Context) ->
 	{false, ReqData, Context}.
